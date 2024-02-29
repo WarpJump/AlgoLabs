@@ -8,7 +8,7 @@
 
 void iteration_1(struct Stack* aboba, size_t number) {
   size_t to_push = number;
-  
+
   size_t stored = number;
 
   while (stored >= 100000) {
@@ -27,11 +27,33 @@ void iteration_1(struct Stack* aboba, size_t number) {
   }
 }
 
-void test1(struct Stack* aboba) {
-  for (int i = 0; i < 1000000; ++i) {
+void test2(struct Stack* aboba) {
+  size_t to_push = 1000000;
+  for (int i = 0; i < to_push; ++i) {
     push(aboba, &i);
   }
+
+  size_t stored = to_push;
+
+  for (int i = 0; i < 100; ++i) {
+    for (int j = 0; j < 10000; ++j) {
+      pop(aboba);
+    }
+    for (int j = 0; j < 10000; ++j) {
+      push(aboba, &j);
+    }
+  }
+
   iteration_1(aboba, 1000000);
+
+  for (int i = 0; i < 100; ++i) {
+    for (int j = 0; j < 10000; ++j) {
+      pop(aboba);
+    }
+    for (int j = 0; j < 10000; ++j) {
+      push(aboba, &j);
+    }
+  }
 }
 
 int main(int argc, char** argv) {
@@ -41,7 +63,7 @@ int main(int argc, char** argv) {
   struct Stack* aboba = stack_ctr(1, sizeof(int));
 #endif
 
-  test1(aboba);
+  test2(aboba);
 
   stack_dtr(aboba);
 }
