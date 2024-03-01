@@ -1,5 +1,5 @@
 # FirstAlgoLaba
-## Reruirements
+## Requirements
 gcc
 
 bash
