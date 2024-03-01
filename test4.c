@@ -1,3 +1,4 @@
+#include "mytime.h"
 #include "stdio.h"
 #include "time.h"
 
@@ -7,23 +8,27 @@
 #include "StackArr/stack_arr.h"
 #endif
 
-void test4(struct Stack* aboba, size_t number) {
+void test4(struct Stack* stack_copy, size_t number) {
   for (int i = 0; i < number; ++i) {
-    push(aboba, &i);
+    push(stack_copy, &i);
   }
 }
 
 int main(int argc, char** argv) {
 #ifdef LIST
-  struct Stack* aboba = stack_ctr(sizeof(int));
+  struct Stack* stack_copy = stack_ctr(sizeof(int));
 #else
-  struct Stack* aboba = stack_ctr(1, sizeof(int));
+  struct Stack* stack_copy = stack_ctr(1, sizeof(int));
 #endif
   srand(time(NULL));
 
   size_t iter = strtol(argv[1], nullptr, 10);
 
-  test4(aboba, iter);
+  long long time_start = Microseconds();
 
-  stack_dtr(aboba);
+  test4(stack_copy, iter);
+
+  printf("%lld\n", Microseconds() - time_start);
+
+  stack_dtr(stack_copy);
 }

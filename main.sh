@@ -17,20 +17,16 @@ do
 
         for ((i=1;i<=NUM_OF_TESTS;i++))
         do
-            start_time=$(date +%s%3N)
-            temp/main.out
-            end_time=$(date +%s%3N)
-            
-            execution_time=$((end_time - start_time))
-            
+             execution_time=$(temp/main.out)
+
             total_time=$((total_time + execution_time))
         done
 
         average_time=$(($total_time / $NUM_OF_TESTS))
 
-        echo "Average list execution time for target $target $method: $average_time ms"
+        echo "Average list execution time for target $target $method: $average_time microsec"
 
-        echo "Average list execution time for target $target $method: $average_time ms" >> outputs/base_tests.txt
+        echo "Average list execution time for target $target $method: $average_time microsec" >> outputs/base_tests.txt
         make clean
     done
 echo -e "\n" >> outputs/base_tests.txt
@@ -47,11 +43,8 @@ do
 
     for((i = 1000; i <=1000000; i += 1000))
     do
-            start_time=$(date +%s%3N)
-            temp/main.out $i
-            end_time=$(date +%s%3N)
-            
-            execution_time=$((end_time - start_time))
+            execution_time=$(temp/main.out $i)
+
             echo -e "$i $execution_time" >> outputs/${method}_time.txt
     done
     make clean
