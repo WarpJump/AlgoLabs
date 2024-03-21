@@ -14,7 +14,7 @@ double Microseconds() {
 }
 
 double* test_sortings(const char* test_folder,
-                      void (*sorting_function)(int*, int),
+                      void (*sorting_function)(int*, size_t),
                       const char* result_path, int from, int to, int step) {
   int size, k, count = 0;
   double* test_times = (double*)calloc((to - from) / step, sizeof(double));
