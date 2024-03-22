@@ -1,8 +1,8 @@
-#include "stdlib.h"
-
 #include "testing.h"
 
 void insertion_sort(int* array, size_t size) {
+  if (!size) return;
+
   int key;
   size_t i, j;
   for (i = 1; i < size; i++) {
@@ -18,6 +18,7 @@ void insertion_sort(int* array, size_t size) {
 }
 
 void bubble_sort(int* array, size_t size) {
+  if (!size) return;
   int temp;
   size_t i, j;
   for (i = 0; i < size - 1; i++) {
@@ -32,6 +33,8 @@ void bubble_sort(int* array, size_t size) {
 }
 
 void selection_sort(int* array, size_t size) {
+  if (!size) return;
+
   int temp;
   size_t min_idx;
   for (size_t i = 0; i < size - 1; i++) {
@@ -48,6 +51,8 @@ void selection_sort(int* array, size_t size) {
 }
 
 void shell_sort(int* array, size_t size) {
+  if (!size) return;
+
   int temp;
   size_t step, i, j;
   for (step = 1; step < size / 3; step = 3 * step + 1) {
