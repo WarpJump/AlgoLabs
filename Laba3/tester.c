@@ -20,7 +20,7 @@
     /*Creating folder for current kind of sort*/                              \
     char result_dir[60];                                                      \
     sprintf(result_dir, "sorting_results/" #func1);                           \
-    mkdir(result_dir, 0777);                                                   \
+    mkdir(result_dir, 0755);                                                   \
     fputs(RedText("Running benchmark for " #func1) "\n", stderr);             \
     double* time = test_sortings(src, func1##_sort,                           \
                                  "sorting_results/" #func1 "/" #func1 ".txt", \
@@ -28,11 +28,9 @@
     fprintf(stderr, RedText("Now writing time: %s/time1.txt"), result_dir);  \
     FILE* time_file = fopen("sorting_results/" #func1 "/time1.txt", "w+");    \
     assert(time_file);                                                        \
-    fprintf(time_file, "aboba\n\n\n\n");                                      \
-    putchar('\n');                                                            \
     fflush(stdout);                                                           \
-    for (int i = from; i <= to; i += step) {                                  \
-      fprintf(time_file, "%lf", time[i]);                                     \
+    for (int i = 0; i < (to - from) / step + 1; ++i) {                                  \
+      fprintf(time_file, "%d %.6lf\n", i, time[i]);                                     \
     }                                                                         \
     fclose(time_file);                                                        \
     free(time);                                                               \
@@ -48,6 +46,6 @@ void test_quadratic() {
 }
 
 int main() {
-  mkdir("sorting_results", 0777);
+  mkdir("sorting_results", 0755);
   test_quadratic();
 }

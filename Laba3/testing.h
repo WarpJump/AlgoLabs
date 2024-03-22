@@ -40,7 +40,7 @@ double Microseconds() {
 double* test_sortings(const char* test_folder,
                       void (*sorting_function)(int*, size_t),
                       const char* result_path, int from, int to, int step) {
-  int size, k, count = 0;
+  int size, count = 0;
   double* test_times = (double*)calloc((to - from) / step + 1, sizeof(double));
 
   printf("Running TEST_SORTINGS for package of tests %s, %d %d %d\n",
@@ -77,9 +77,9 @@ double* test_sortings(const char* test_folder,
       clock_t start = Microseconds();
       sorting_function(array, size);
       clock_t end = Microseconds();
-      printf("Test time is %ld microsec\n", end - start);
+      fprintf(stderr, "Test time is %ld microsec\n", end - start);
 
-      test_times[count] += end - start;
+      test_times[count] += (double)(end - start);
 
       for (int i = 0; i < size; ++i) {
         assert(array[i] == sorted_array[i]);
@@ -106,7 +106,7 @@ double* test_sortings(const char* test_folder,
 
   for (int i = 0; i < count; i++) {
     fprintf(stderr, "%d ", i);
-    fprintf(result_file, "Test %d: %.6lf seconds\n", i + 1, test_times[i]);
+    fprintf(result_file, "Test %d: %.6lf microsec\n", i + 1, test_times[i]);
   }
   fputc('\n', stderr);
   fclose(result_file);

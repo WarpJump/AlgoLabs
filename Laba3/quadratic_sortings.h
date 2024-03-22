@@ -4,8 +4,8 @@ void insertion_sort(int* array, size_t size) {
   if (!size) return;
 
   int key;
-  size_t i, j;
-  for (i = 1; i < size; i++) {
+  long long i, j;
+  for (i = 1; i < (long long)size; i++) {
     key = array[i];
     j = i - 1;
 
